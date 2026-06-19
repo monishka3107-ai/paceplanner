@@ -15,7 +15,7 @@ A simple and interactive study planning web application designed to help student
 
 📂 GitHub Repository
 
-🔗 https://monishka3107-ai.github.io/paceplanner/<img width="1511" height="827" alt="Screenshot 2026-06-19 at 4 45 19 PM" src="https://github.com/user-attachments/assets/b4a3ebd8-ba9c-4733-add1-73769c69a45e" />
+🔗 https://github.com/monishka3107-ai/paceplanner/<img width="1511" height="827" alt="Screenshot 2026-06-19 at 4 45 19 PM" src="https://github.com/user-attachments/assets/b4a3ebd8-ba9c-4733-add1-73769c69a45e" />
 <img width="1512" height="827" alt="Screenshot 2026-06-19 at 5 20 36 PM" src="https://github.com/user-attachments/assets/0011e4dc-777b-4c29-a47f-ac7a4ca69103" />
 <img width="1512" height="827" alt="Screenshot 2026-06-19 at 5 22 35 PM" src="https://github.com/user-attachments/assets/a78a7c80-e7b3-493e-b25f-b4e98ab691eb" />
 /pace-planner
@@ -86,8 +86,7 @@ pace-planner/
 
 Clone the repository:
 
-git clone https://monishka3107-ai.github.io/paceplanner/
-
+git clone https://github.com/monishka3107-ai/paceplanner
 Navigate to the project folder:
 
 cd pace-planner
