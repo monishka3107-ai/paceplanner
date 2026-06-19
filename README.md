@@ -9,9 +9,7 @@
 
 A simple and interactive study planning web application designed to help students organize tasks, track progress, and stay consistent with their academic goals.
 
-🚀 Live Demo
 
-🔗 Add your GitHub Pages/Vercel/Netlify link here
 
 📂 GitHub Repository
 
