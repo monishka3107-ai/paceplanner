@@ -23,9 +23,10 @@ HTML · CSS · vanilla JavaScript — no frameworks, no libraries.
 Just open `index.html` in any browser. That's it.
 
 ## What I learned
-- [e.g. how to track UI state in a JS array and re-render on every change]
-- [e.g. working with Date.now() for timing]
-- [one honest thing that was harder than expected]
+- Learned the core frontend pattern: keep all data in a JavaScript array, and re-draw the whole list from that array every time something changes.
+- Got comfortable with DOM manipulation — creating elements, reading input values, and handling button clicks with event listeners.
+- Used Date.now() to capture real elapsed time, and learned to convert milliseconds into minutes.
+- Hardest part: realising that changing the calculation didn't change the label — the number was in seconds but still said "min." Taught me code and display are two separate things.
 
 ## What's next
 - Save data so it persists after closing (localStorage, then a real database)
