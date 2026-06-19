@@ -187,8 +187,17 @@
                 });
 
                 // hide the button once the task is done
+                // while the task isn't finished, show the Start/Stop timer button
                 if (task.actual === null) {
                     li.appendChild(btn);
+                } else {
+                    // once finished, show an Edit button to fix the time manually
+                    const editBtn = document.createElement("button");
+                    editBtn.textContent = "Edit";
+                    editBtn.addEventListener("click", function () {
+                        editTime(index);
+                    });
+                    li.appendChild(editBtn);
                 }
 
                 taskList.appendChild(li);
@@ -213,6 +222,28 @@
             }
 
             render();
+        }
+        function editTime(index) {
+            const task = tasks[index];
+
+            // ask the user for the real time
+            const input = prompt(
+                `How many minutes did "${task.name}" actually take?`,
+                task.actual   // shows the current value as the default
+            );
+
+            // if they cancelled, do nothing
+            if (input === null) return;
+
+            const newActual = Number(input);
+
+            // only accept a sensible number
+            if (newActual > 0) {
+                task.actual = Math.round(newActual);
+                render();
+            } else {
+                alert("Please enter a number greater than 0.");
+            }
         }
 
         function showInsight() {
