@@ -1,5 +1,5 @@
 # paceplanener
-[# ⏱️ PacePlanner
+
 
 A study planner that tracks how long tasks **actually** take you versus how long you **estimated** — then reveals your time-estimation pattern.
 
