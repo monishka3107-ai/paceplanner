@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacePlanner</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            max-width: 620px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #0f1b2d;
+            color: #e8f0f7;
+        }
+
+        h1 {
+            margin-bottom: 4px;
+        }
+
+        h1+p {
+            color: #8aa1b6;
+            margin-top: 0;
+        }
+
+        /* the input row */
+        div {
+            display: flex;
+            gap: 8px;
+            margin: 24px 0;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #2a3f57;
+            border-radius: 8px;
+            background: #16263c;
+            color: #e8f0f7;
+            font-size: 15px;
+        }
+
+        input::placeholder {
+            color: #6e8198;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #5fd0e8;
+            color: #0f1b2d;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7fdcf0;
+        }
+
+        /* the task list */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #16263c;
+            border: 1px solid #2a3f57;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* the timer button inside a task — smaller, outlined */
+        li button {
+            background: transparent;
+            border: 1px solid #5fd0e8;
+            color: #5fd0e8;
+            flex-shrink: 0;
+        }
+
+        li button:hover {
+            background: #5fd0e8;
+            color: #0f1b2d;
+        }
+
+        /* the insight line */
+        #insight {
+            margin-top: 24px;
+            padding: 16px;
+            background: #16263c;
+            border-left: 3px solid #5fd0e8;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        #insight:empty {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>⏱️ PacePlanner</h1>
+    <p>How long do you <em>think</em> a task takes vs how long it <em>really</em> does.</p>
+
+    <!-- task list will appear here -->
+    <div>
+        <input id="taskName" type="text" placeholder="Task name (e.g. DSA practice)">
+        <input id="taskEstimate" type="number" placeholder="Est. minutes">
+        <button id="addBtn">Add task</button>
+    </div>
+    <ul id="taskList"></ul>
+    <p id="insight"></p>
+
+    <script>
+        // our "database" for now — just an array in memory
+        let tasks = [];
+
+        // grab the elements we'll use
+        const nameInput = document.getElementById("taskName");
+        const estimateInput = document.getElementById("taskEstimate");
+        const addBtn = document.getElementById("addBtn");
+        const taskList = document.getElementById("taskList");
+
+        // when the button is clicked, add a task
+        addBtn.addEventListener("click", function () {
+            const name = nameInput.value.trim();
+            const estimate = Number(estimateInput.value);
+
+            // basic validation — don't add empty/invalid tasks
+            if (name === "" || estimate <= 0) {
+                alert("Please enter a task name and an estimate above 0.");
+                return;
+            }
+
+            // create a task object and store it
+            const task = {
+                name: name,
+                estimate: estimate,
+                actual: null,        // real minutes, filled in when timer stops
+                startTime: null,     // when the timer was started
+                running: false       // is the timer going right now?
+            };
+            tasks.push(task);
+
+            // clear the inputs for the next entry
+            nameInput.value = "";
+            estimateInput.value = "";
+
+            render(); // redraw the list
+        });
+
+        // draws the whole list from the tasks array
+        function render() {
+            taskList.innerHTML = "";
+
+            tasks.forEach(function (task, index) {
+                const li = document.createElement("li");
+
+                // the task text
+                let text = `${task.name} — est. ${task.estimate} min`;
+
+                // if it's finished, show the comparison
+                if (task.actual !== null) {
+                    const diff = task.actual - task.estimate;
+                    const word = diff > 0 ? `${diff} min OVER` : `${Math.abs(diff)} min under`;
+                    text += ` → actual ${task.actual} min (${word})`;
+                }
+
+                li.textContent = text + " ";
+
+                // the timer button
+                const btn = document.createElement("button");
+                btn.textContent = task.running ? "Stop" : "Start";
+                btn.addEventListener("click", function () {
+                    toggleTimer(index);
+                });
+
+                // hide the button once the task is done
+                if (task.actual === null) {
+                    li.appendChild(btn);
+                }
+
+                taskList.appendChild(li);
+            });
+
+            showInsight();   // ← run the insight every time the list redraws
+        }
+
+        function toggleTimer(index) {
+            const task = tasks[index];
+
+            if (!task.running) {
+                // START
+                task.running = true;
+                task.startTime = Date.now();   // current time in milliseconds
+            } else {
+                // STOP
+                task.running = false;
+                const elapsedMs = Date.now() - task.startTime;
+                const elapsedMin = Math.round(elapsedMs / 1000 / 60); // ms → minutes
+                task.actual = Math.max(elapsedMin, 1); // at least 1 min so it's never 0
+            }
+
+            render();
+        }
+
+        function showInsight() {
+            // only look at tasks that are finished
+            const done = tasks.filter(function (t) { return t.actual !== null; });
+
+            const insight = document.getElementById("insight");
+
+            // need at least 2 finished tasks before a "pattern" means anything
+            if (done.length < 2) {
+                insight.textContent = "";
+                return;
+            }
+
+            // add up all estimates and all actuals
+            let totalEstimate = 0;
+            let totalActual = 0;
+            done.forEach(function (t) {
+                totalEstimate += t.estimate;
+                totalActual += t.actual;
+            });
+
+            // how far off are you, as a percentage?
+            const ratio = totalActual / totalEstimate;
+            const percent = Math.round(Math.abs(ratio - 1) * 100);
+
+            if (ratio > 1) {
+                insight.textContent = `📈 On average you take ${percent}% LONGER than you estimate.`;
+            } else if (ratio < 1) {
+                insight.textContent = `📉 On average you finish ${percent}% FASTER than you estimate.`;
+            } else {
+                insight.textContent = `🎯 Your estimates are spot on!`;
+            }
+        }
+    </script>
+</body>
+
+</html>
