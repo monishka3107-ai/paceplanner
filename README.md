@@ -15,6 +15,7 @@ plus a one-line summary of my overall pattern across all tasks.
 - Built-in Start/Stop timer that records the real time spent
 - Per-task comparison (over / under your estimate)
 - An insight line that learns your overall pattern (e.g. "you finish 33% faster than you estimate")
+- Let's the user edit time if they skipped to hit the stop.
 
 ## Built with
 HTML · CSS · vanilla JavaScript — no frameworks, no libraries.
