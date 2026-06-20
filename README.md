@@ -1,32 +1,130 @@
-[# ⏱️ PacePlanner
+# 📚 Pace Planner
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://monishka3107-ai.github.io/paceplanner/)
 
-A study planner that tracks how long tasks **actually** take you versus how long you **estimated** — then reveals your time-estimation pattern.
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![Status](https://img.shields.io/badge/Status-Completed-success)
 
-**Live demo:** https://monishka3107-ai.github.io/paceplanner/
+A simple and interactive study planning web application designed to help students organize tasks, track progress, and stay consistent with their academic goals.
 
-## Why I built it
-I kept guessing how long studying would take and getting it wrong. So I built
-something that records my estimate, times the real session, and shows the gap —
-plus a one-line summary of my overall pattern across all tasks.
 
-## Features
-- Add tasks with a time estimate
-- Built-in Start/Stop timer that records the real time spent
-- Per-task comparison (over / under your estimate)
-- An insight line that learns your overall pattern (e.g. "you finish 33% faster than you estimate")
+📂 GitHub Repository
 
-## Built with
-HTML · CSS · vanilla JavaScript — no frameworks, no libraries.
+🔗 https://github.com/monishka3107-ai/paceplanner
 
-## Run it
-Just open `index.html` in any browser. That's it.
+⸻
 
-## What I learned
-- [e.g. how to track UI state in a JS array and re-render on every change]
-- [e.g. working with Date.now() for timing]
-- [one honest thing that was harder than expected]
+📖 Overview
 
-## What's next
-- Save data so it persists after closing (localStorage, then a real database)
-- A chart of estimated vs actual over time
-- Rebuild the backend in Python — and eventually predict task time with a simple model]
+Managing studies, assignments, and deadlines can be overwhelming for students.
+
+Pace Planner helps users stay organized by providing a clean and intuitive platform to plan study sessions, track task completion, monitor productivity, and maintain consistency.
+
+The goal of this project is to improve time management and help students build better study habits.
+
+⸻
+
+✨ Features
+
+✅ Add and manage study tasks
+
+✅ Set priorities and deadlines
+
+✅ Track completed tasks
+
+✅ Monitor study progress
+
+✅ Clean and responsive user interface
+
+✅ Real-time task updates
+
+✅ Lightweight and fast performance
+
+✅ Built entirely with Vanilla JavaScript
+
+⸻
+
+🛠️ Tech Stack
+
+* HTML5
+* CSS3
+* JavaScript (Vanilla JS)
+
+⸻
+
+🎯 Use Cases
+
+* Students managing daily study schedules
+* Exam preparation planning
+* Assignment tracking
+* Productivity improvement
+* Building consistent study habits
+
+⸻
+
+📁 Project Structure
+
+pace-planner/
+│
+├── index.html
+├── style.css
+├── script.js
+├── assets/
+└── README.md
+
+⸻
+
+⚙️ Installation
+
+Clone the repository:
+
+git clone https://github.com/your-username/pace-planner.git
+
+Navigate to the project folder:
+
+cd pace-planner
+
+Open the project:
+
+Open index.html in your browser
+
+No additional dependencies are required.
+
+⸻
+
+📈 Future Improvements
+
+* User authentication
+* Cloud data storage
+* Study analytics dashboard
+* Calendar integration
+* Dark mode support
+* Reminder notifications
+* AI-powered study recommendations
+* Mobile app version
+
+⸻
+
+📚 What I Learned
+
+* DOM Manipulation
+* Event Handling
+* JavaScript Logic Building
+* Responsive Web Design
+* Project Structuring
+* Frontend Development Best Practices
+
+⸻
+
+👩‍💻 Author
+
+Monishka Yadav
+
+First-Year AIML Student passionate about Artificial Intelligence, Machine Learning, and building technology-driven solutions for real-world problems.
+
+⸻
+
+⭐ Support
+
+If you found this project useful, consider giving the repository a star and sharing your feedback.
